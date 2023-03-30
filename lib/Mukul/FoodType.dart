@@ -18,7 +18,7 @@ class FoodType extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: (MediaQuery.of(context).size.height) * 0.3 * 0.5,
-      width: (MediaQuery.of(context).size.width) * 0.8 * 0.4,
+      width: (MediaQuery.of(context).size.width) * 0.8 * 0.5,
       decoration: BoxDecoration(
         color: Color(bgcolor),
         borderRadius: BorderRadius.circular(40),
