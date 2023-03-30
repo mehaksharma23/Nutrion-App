@@ -53,16 +53,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(
                       width: 15,
                     ),slider(
-                      boxName: " Eat Healthy",
-                      imagePath: "assets/eathealthy.png",
-                      boxQuote:"Maintaining good health should be the primary focus of everyone" ,
+                      boxName: " Healthy Recipes",
+                      imagePath: "assets/recipe.png",
+                      boxQuote:"Browse thousands of recipes \n from all over the world." ,
                     ),
                     SizedBox(
                       width: 15,
                     ),slider(
-                      boxName: " Eat Healthy",
-                      imagePath: "assets/eathealthy.png",
-                      boxQuote:"Maintaining good health should be the primary focus of everyone" ,
+                      boxName: "Track Your Health",
+                      imagePath: "assets/track.png",
+                      boxQuote:"With amazing inbuilt tools you can \n track your progress." ,
                     ),
                     SizedBox(
                       width: 15,
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialStateProperty.all<Color>(Colors.green),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(40),
                           side: BorderSide(color: Colors.green)),
                     ),
                   ),
