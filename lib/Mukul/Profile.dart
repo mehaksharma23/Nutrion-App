@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:nutrition_app/Mukul/ProfileMenuSettings.dart';
+import 'package:nutrition_app/Mukul/Components/ProfileMenuSettings.dart';
 
 void main() => runApp(MaterialApp(
       home: Profile(),

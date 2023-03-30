@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:nutrition_app/Mukul/FoodType.dart';
+import 'package:nutrition_app/Mukul/Components/FoodType.dart';
 
 void main() => runApp(MaterialApp(
       home: Home(),
