@@ -3,6 +3,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:nutrition_app/Mukul/FoodType.dart';
 
 void main() => runApp(MaterialApp(
       home: Home(),
@@ -25,7 +27,7 @@ class _HomeState extends State<Home> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
                 child: Column(
@@ -46,73 +48,181 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  width: (MediaQuery.of(context).size.width) * 0.8,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFFFF2F0),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        width: (MediaQuery.of(context).size.width) * 0.8 * 0.5,
+              Container(
+                width: (MediaQuery.of(context).size.width) * 0.9,
+                height: (MediaQuery.of(context).size.height) * 0.2,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFF2F0),
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: (MediaQuery.of(context).size.width) * 0.9 * 0.5,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               "ARTICLE",
                               style: TextStyle(
                                 color: Color(0xFFFF806E),
                                 letterSpacing: 1.5,
-                                fontSize: 10,
+                                fontSize: 15,
                               ),
                             ),
                             Text(
                               "The pros and cons of fast food.",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 18,
                               ),
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFFFF8473),
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                width: (MediaQuery.of(context).size.width) * 0.9 * 0.5 * 0.7,
+                                height: (MediaQuery.of(context).size.height)*0.05,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFFF8473),
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Read Now",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_right,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              child: Text("READ NOW"),
                             ),
                           ],
                         ),
                       ),
-                      Image(
-                        image: AssetImage('assets/FastFood.png'),
-                        fit: BoxFit.fill,
+                    ),
+                    Image(
+                      image: AssetImage('assets/FastFood.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: (MediaQuery.of(context).size.width) * 0.9,
+                height: (MediaQuery.of(context).size.height) * 0.14,
+                decoration: BoxDecoration(
+                  color: Color(0xFF9E9BC7),
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        height: (MediaQuery.of(context).size.height) * 0.10,
+                        width: (MediaQuery.of(context).size.width) * 0.9 * 0.5,
+                        child: Center(
+                          child: Text(
+                            "Track Your Weekly Progress",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Container(
+                          width:
+                              (MediaQuery.of(context).size.width) * 0.9 * 0.3,
+                          height: (MediaQuery.of(context).size.height) * 0.05,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "View Now",
+                                style: TextStyle(
+                                  color: Color(0xFF9E9BC7),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Icon(
+                                Icons.arrow_right_alt,
+                                color: Color(0xFF9E9BC7),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               Container(
-                width: (MediaQuery.of(context).size.width) * 0.8,
-                decoration: BoxDecoration(
-                  color: Color(0xFF9E9BC7),
-                ),
-                child: Row(
+                height: (MediaQuery.of(context).size.height) * 0.3,
+                width: (MediaQuery.of(context).size.width) * 0.9,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Track Your Weekly Progress",
+                      "Choose your Favorites",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
-                      child: Text("View more"),
+                      height: (MediaQuery.of(context).size.height) * 0.3 * 0.6,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          FoodType(
+                            bgcolor: 0xFFFFF2F0,
+                            boxName: "Fruits",
+                            imagePath: "assets/Fruits.png",
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          FoodType(
+                            bgcolor: 0xFFEFF7EE,
+                            boxName: "Vegetable",
+                            imagePath: "assets/Vegetables.png",
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          FoodType(
+                            bgcolor: 0xFFFFF8EB,
+                            boxName: "Snacks",
+                            imagePath: "assets/Snacks.png",
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-              Container(
-                  child: Text(
-                      "Choose your Favorites",
-                  ),
               ),
             ],
           ),
