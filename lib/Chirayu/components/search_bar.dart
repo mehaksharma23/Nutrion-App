@@ -17,7 +17,6 @@ class SearchBar extends StatelessWidget {
               borderSide: BorderSide(width: 0, style: BorderStyle.none)),
           hintText: "Search recipes, articles, people...",
           hintStyle: TextStyle(
-            fontFamily: "Signika",
             color: Color.fromRGBO(153, 153, 153, 1),
             fontSize: 16,
           ),
