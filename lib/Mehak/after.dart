@@ -163,7 +163,7 @@ class _afterState extends State<after>{
                    children:[
                      Container(
                        child: Text("Ingredients",
-                       textAlign: TextAlign.topleft,
+                       textAlign: TextAlign.left,
                        style:TextStyle(
                          fontSize: 27,
                        ))
