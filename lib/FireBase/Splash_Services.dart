@@ -2,17 +2,31 @@
 
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nutrition_app/BottomNavigationBar.dart';
 import 'package:nutrition_app/FireBase/Auth/sign_in.dart';
+import 'package:nutrition_app/Mukul/profileDetails.dart';
 
 class Splashservices {
   void isLogin(BuildContext context) {
-    Timer(
-      const Duration(seconds: 3),
-      () => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => SignIn()),
-      ),
-    );
+    final auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+
+    if (user != null) {
+      Timer(
+        const Duration(seconds: 3),
+        () => Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => profileDetails()),
+        ),
+      );
+    } else {
+      Timer(
+        const Duration(seconds: 3),
+        () => Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => SignIn()),
+        ),
+      );
+    }
   }
 }

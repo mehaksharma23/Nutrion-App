@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nutrition_app/BottomNavigationBar.dart';
+import 'package:nutrition_app/FireBase/Auth/ExceptionHandler.dart';
 import 'package:nutrition_app/FireBase/Auth/register.dart';
 
 class SignIn extends StatefulWidget {
@@ -15,6 +18,32 @@ class _MyHomePageState extends State<SignIn> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  final _auth = FirebaseAuth.instance;
+  bool loading = false;
+
+  void signin() {
+    _auth
+        .signInWithEmailAndPassword(
+      email: emailController.text.toString(),
+      password: passwordController.text.toString(),
+    )
+        .then((value) {
+      ExceptionHandle().toastMessage(value.user!.email.toString());
+      setState(() {
+        loading = false;
+      });
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => navBar()),
+      );
+    }).onError((error, stackTrace) {
+      debugPrint(error.toString());
+      ExceptionHandle().toastMessage(error.toString());
+      setState(() {
+        loading = false;
+      });
+    });
+  }
 
   @override
   void dispose() {
@@ -35,7 +64,7 @@ class _MyHomePageState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         SystemNavigator.pop();
         return true;
       },
@@ -175,20 +204,31 @@ class _MyHomePageState extends State<SignIn> {
                 child: Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          loading = true;
+                        });
+                        signin();
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(),
                       backgroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                     ),
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 19,
-                      ),
-                    ),
+                    child: loading
+                        ? CircularProgressIndicator(
+                            strokeWidth: 3,
+                            color: Colors.black,
+                          )
+                        : Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 19,
+                            ),
+                          ),
                   ),
                 ),
               ),

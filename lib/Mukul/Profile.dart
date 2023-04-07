@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nutrition_app/FireBase/Auth/ExceptionHandler.dart';
+import 'package:nutrition_app/FireBase/Auth/sign_in.dart';
 import 'package:nutrition_app/Mukul/Components/ProfileMenuSettings.dart';
 
-void main() => runApp(MaterialApp(
-      home: Profile(),
-      debugShowCheckedModeBanner: false,
-    ));
+// void main() => runApp(MaterialApp(
+//       home: Profile(),
+//       debugShowCheckedModeBanner: false,
+//     ));
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -16,22 +19,25 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
         body: Container(
-          height: (MediaQuery.of(context).size.height)*0.8,
+          height: (MediaQuery.of(context).size.height) * 0.9,
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
                 "Profile",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               CircleAvatar(
                 backgroundImage: AssetImage("assets/anonymous.jpg"),
@@ -44,7 +50,7 @@ class _ProfileState extends State<Profile> {
                       "Anonymous",
                       style: TextStyle(
                         fontSize: 30,
-                        fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(
@@ -66,11 +72,39 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ProfileMenuCard(icon: Icons.person, textBox: "Edit Profile"),
-                    ProfileMenuCard(icon: Icons.star, textBox: "Renew Plan"),
-                    ProfileMenuCard(icon: Icons.settings, textBox: "Settings"),
-                    ProfileMenuCard(icon: Icons.insert_page_break, textBox: "Terms & Privacy Policy"),
-                    ProfileMenuCard(icon: Icons.logout, textBox: "Log Out"),
+                    ProfileMenuCard(
+                      icon: Icons.person,
+                      textBox: "Edit Profile",
+                      onTap: () {},
+                    ),
+                    ProfileMenuCard(
+                      icon: Icons.star,
+                      textBox: "Renew Plan",
+                      onTap: () {},
+                    ),
+                    ProfileMenuCard(
+                      icon: Icons.settings,
+                      textBox: "Settings",
+                      onTap: () {},
+                    ),
+                    ProfileMenuCard(
+                      icon: Icons.insert_page_break,
+                      textBox: "Terms & Privacy Policy",
+                      onTap: () {},
+                    ),
+                    ProfileMenuCard(
+                      icon: Icons.logout,
+                      textBox: "Log Out",
+                      onTap: () {
+                        auth.signOut().then((value) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) => SignIn()),
+                          );
+                        }).onError((error, stackTrace) {
+                          ExceptionHandle().toastMessage(error.toString());
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),
