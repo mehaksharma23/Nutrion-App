@@ -37,6 +37,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   pie_chart: ^5.3.2
   camera: ^0.10.3+2
+  google_nav_bar: ^5.0.6
+  flutter_launcher_icons: ^0.12.0
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.4.0
+  cloud_firestore: ^4.5.0
+  fluttertoast: ^8.2.1
+  firebase_database: ^10.1.0
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +60,10 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/anonymous.jpg"
 flutter:
 
   # The following line ensures that the Material Icons font is

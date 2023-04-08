@@ -6,14 +6,16 @@ class ProfileMenuCard extends StatelessWidget {
   ProfileMenuCard({
     required this.icon,
     required this.textBox,
+    required this.onTap,
     super.key,
   });
   IconData icon;
   String textBox;
+  VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: onTap,
       child: Container(
         height: (MediaQuery.of(context).size.height) * 0.5 * 0.15,
         child: Row(
