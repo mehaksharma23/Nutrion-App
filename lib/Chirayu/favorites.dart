@@ -12,7 +12,7 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
-  bool isFoodPage = false;
+  bool isFoodPage = true;
 
   void changePage() {
     setState(() {

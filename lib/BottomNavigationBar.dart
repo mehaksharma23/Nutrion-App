@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:nutrition_app/Chirayu/favorites.dart';
 import 'package:nutrition_app/Chirayu/search_page.dart';
 import 'package:nutrition_app/Mukul/Home.dart';
 import 'package:nutrition_app/Mukul/Profile.dart';
@@ -55,7 +56,7 @@ class _navBarState extends State<navBar> {
                 ),
                 SearchPage(),
                 SearchPage(),
-                SearchPage(),
+                Favorites(),
                 Profile(
                   body: doc,
                 ),
