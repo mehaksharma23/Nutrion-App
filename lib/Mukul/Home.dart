@@ -1,30 +1,26 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:nutrition_app/Mukul/Components/FoodType.dart';
 
-// void main() => runApp(MaterialApp(
-//       home: Home(),
-//       debugShowCheckedModeBanner: false,
-//     ));
-
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({Key? key, required this.body }) : super(key: key);
+  final body;
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Home> createState() => _HomeState(body: body);
 }
 
 class _HomeState extends State<Home> {
+  _HomeState({required this.body}) : super();
+  final body;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
+      home: Scaffold(
           body: Container(
             width: MediaQuery.of(context).size.width,
             child: Column(
@@ -35,7 +31,8 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Text(
-                        "Hello NAME",
+                        // "Hello ${snapshot.data!.docs[val]['Name']}",
+                        "Hello ${body['Name']}",
                         style: TextStyle(
                           color: Color(0xFF91C788),
                           fontSize: 25,
@@ -51,8 +48,14 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Container(
-                  width: (MediaQuery.of(context).size.width) * 0.9,
-                  height: (MediaQuery.of(context).size.height) * 0.2,
+                  width: (MediaQuery
+                      .of(context)
+                      .size
+                      .width) * 0.9,
+                  height: (MediaQuery
+                      .of(context)
+                      .size
+                      .height) * 0.2,
                   decoration: BoxDecoration(
                     color: Color(0xFFFFF2F0),
                     borderRadius: BorderRadius.circular(40),
@@ -61,12 +64,19 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        width: (MediaQuery.of(context).size.width) * 0.9 * 0.5,
+                        width: (MediaQuery
+                            .of(context)
+                            .size
+                            .width) *
+                            0.9 *
+                            0.5,
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
+                          padding:
+                          const EdgeInsets.fromLTRB(10, 15, 10, 15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceAround,
                             children: [
                               Text(
                                 "ARTICLE",
@@ -85,20 +95,28 @@ class _HomeState extends State<Home> {
                               InkWell(
                                 onTap: () {},
                                 child: Container(
-                                  width: (MediaQuery.of(context).size.width) *
+                                  width: (MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width) *
                                       0.9 *
                                       0.5 *
                                       0.7,
-                                  height: (MediaQuery.of(context).size.height) *
+                                  height: (MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height) *
                                       0.05,
                                   decoration: BoxDecoration(
                                     color: Color(0xFFFF8473),
-                                    borderRadius: BorderRadius.circular(40),
+                                    borderRadius:
+                                    BorderRadius.circular(40),
                                   ),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         "Read Now",
@@ -126,8 +144,14 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Container(
-                  width: (MediaQuery.of(context).size.width) * 0.9,
-                  height: (MediaQuery.of(context).size.height) * 0.14,
+                  width: (MediaQuery
+                      .of(context)
+                      .size
+                      .width) * 0.9,
+                  height: (MediaQuery
+                      .of(context)
+                      .size
+                      .height) * 0.14,
                   decoration: BoxDecoration(
                     color: Color(0xFF9E9BC7),
                     borderRadius: BorderRadius.circular(40),
@@ -138,9 +162,17 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          height: (MediaQuery.of(context).size.height) * 0.10,
-                          width:
-                              (MediaQuery.of(context).size.width) * 0.9 * 0.5,
+                          height:
+                          (MediaQuery
+                              .of(context)
+                              .size
+                              .height) * 0.10,
+                          width: (MediaQuery
+                              .of(context)
+                              .size
+                              .width) *
+                              0.9 *
+                              0.5,
                           child: Center(
                             child: Text(
                               "Track Your Weekly Progress",
@@ -154,9 +186,17 @@ class _HomeState extends State<Home> {
                         TextButton(
                           onPressed: () {},
                           child: Container(
-                            width:
-                                (MediaQuery.of(context).size.width) * 0.9 * 0.3,
-                            height: (MediaQuery.of(context).size.height) * 0.05,
+                            width: (MediaQuery
+                                .of(context)
+                                .size
+                                .width) *
+                                0.9 *
+                                0.3,
+                            height: (MediaQuery
+                                .of(context)
+                                .size
+                                .height) *
+                                0.05,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(30),
@@ -186,8 +226,14 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Container(
-                  height: (MediaQuery.of(context).size.height) * 0.3,
-                  width: (MediaQuery.of(context).size.width) * 0.9,
+                  height: (MediaQuery
+                      .of(context)
+                      .size
+                      .height) * 0.3,
+                  width: (MediaQuery
+                      .of(context)
+                      .size
+                      .width) * 0.9,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,8 +244,12 @@ class _HomeState extends State<Home> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Container(
-                        height:
-                            (MediaQuery.of(context).size.height) * 0.3 * 0.6,
+                        height: (MediaQuery
+                            .of(context)
+                            .size
+                            .height) *
+                            0.3 *
+                            0.6,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
@@ -236,7 +286,6 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-        ),
       ),
     );
   }
