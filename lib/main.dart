@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nutrition_app/Chirayu/favorites.dart';
+import 'package:nutrition_app/Chirayu/components/recipes.dart';
 import 'Chirayu/search_page.dart';
 
 void main() {
@@ -14,7 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: "Signika"),
-      home: const SearchPage(),
+      home: Favorites(),
+      routes: {
+        "/foods": (context) => Favorites(),
+        "/recipes": (context) => FavoriteRecipes()
+      },
     );
   }
 }
