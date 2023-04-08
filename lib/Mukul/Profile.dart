@@ -6,19 +6,16 @@ import 'package:nutrition_app/FireBase/Auth/ExceptionHandler.dart';
 import 'package:nutrition_app/FireBase/Auth/sign_in.dart';
 import 'package:nutrition_app/Mukul/Components/ProfileMenuSettings.dart';
 
-// void main() => runApp(MaterialApp(
-//       home: Profile(),
-//       debugShowCheckedModeBanner: false,
-//     ));
-
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
-
+  const Profile({Key? key, required this.body}) : super(key: key);
+  final body;
   @override
-  State<Profile> createState() => _ProfileState();
+  State<Profile> createState() => _ProfileState(body: body);
 }
 
 class _ProfileState extends State<Profile> {
+  _ProfileState({required this.body}):super();
+  final body;
   final auth = FirebaseAuth.instance;
 
   @override
@@ -47,7 +44,7 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   children: [
                     Text(
-                      "Anonymous",
+                      "${body['Name']}",
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
