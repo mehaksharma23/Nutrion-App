@@ -2,12 +2,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:nutrition_app/BottomNavigationBar.dart';
 import 'package:nutrition_app/FireBase/Auth/ExceptionHandler.dart';
-import 'package:nutrition_app/Mukul/Home.dart';
 
 class profileDetails extends StatefulWidget {
   const profileDetails({Key? key}) : super(key: key);

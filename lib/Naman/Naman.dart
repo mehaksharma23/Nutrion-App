@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:nutrition_app/Naman/Camera.dart';
@@ -31,6 +33,7 @@ class Camera extends StatefulWidget {
 
 class _CameraState extends State<Camera> {
   late CameraController _controller;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -55,6 +58,14 @@ class _CameraState extends State<Camera> {
     });
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
@@ -69,28 +80,35 @@ class _CameraState extends State<Camera> {
               Center(
                 child: Container(
                   margin: EdgeInsets.all(20.0),
-                  child: MaterialButton(onPressed: () async {
-                    if (!_controller.value.isInitialized) {
-                      return null;
-                    }
-                    if (_controller.value.isTakingPicture) {
-                      return null;
-                    }
-                    try {
-                      await _controller.setFlashMode(FlashMode.auto);
-                      XFile file = await _controller.takePicture();
+                  child: InkWell(
+                    onTap: () async {
+                      if (!_controller.value.isInitialized) {
+                        return null;
+                      }
+                      if (_controller.value.isTakingPicture) {
+                        return null;
+                      }
+                      try {
+                        await _controller.setFlashMode(FlashMode.auto);
+                        XFile file = await _controller.takePicture();
 
-                      Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ImagePreview(file)));
-                    } on CameraException catch (e) {
-                      debugPrint("Error occured while taking picture : $e");
-                      return null;
-                    }
-                  },
-                    color: Colors.white,
-                    child: Text("CLICK"),
+                            builder: (context) => ImagePreview(file),
+                          ),
+                        );
+                      } on CameraException catch (e) {
+                        debugPrint("Error occured while taking picture : $e");
+                        return null;
+                      }
+                    },
+                    enableFeedback: false,
+                    child: Icon(
+                      Icons.camera,
+                      color: Colors.white,
+                      size: 70,
+                    ),
                   ),
                 ),
               ),

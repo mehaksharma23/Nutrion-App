@@ -18,7 +18,7 @@ class _FavoriteRecipesState extends State<FavoriteRecipes> {
         RecipeTile(
           image: 'assets/recipe1.png',
           calories: 250,
-          dishName: "Chopped Spring Ramen",
+          dishName: "Chopped Spring Ramen with pav bhaji and paneer",
           ingredients: "Scallions & Tomatoes",
         ),
         RecipeTile(

@@ -24,42 +24,46 @@ class RecipeTile extends StatelessWidget {
             color: Color.fromRGBO(229, 247, 227, 1),
             borderRadius: BorderRadius.circular(16),
           ),
-          height: 120,
           child: Padding(
-            padding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
+            padding: EdgeInsets.only(top: 20, bottom: 20),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(right: 8.0),
+                  padding:  EdgeInsets.all(8.0),
                   child: Image.asset(image),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "$calories Kcal",
-                      style: TextStyle(
-                        color: Color.fromRGBO(108, 182, 99, 1),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  decoration: BoxDecoration(
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "$calories Kcal",
+                        style: TextStyle(
+                          color: Color.fromRGBO(108, 182, 99, 1),
+                        ),
                       ),
-                    ),
-                    Text(
-                      dishName,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(80, 80, 80, 1),
+                      Text(
+                        dishName,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(80, 80, 80, 1),
+                        ),
                       ),
-                    ),
-                    Text(
-                      ingredients,
-                      style: TextStyle(
-                        color: Color.fromRGBO(118, 118, 118, 1),
-                        fontSize: 14,
-                      ),
-                    )
-                  ],
+                      Text(
+                        ingredients,
+                        style: TextStyle(
+                          color: Color.fromRGBO(118, 118, 118, 1),
+                          fontSize: 14,
+                        ),
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

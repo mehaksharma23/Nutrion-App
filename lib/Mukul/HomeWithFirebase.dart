@@ -12,6 +12,10 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(launchPage());
 }
 
@@ -26,6 +30,7 @@ class _launchPageState extends State<launchPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       theme: ThemeData(fontFamily: "Signika"),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
