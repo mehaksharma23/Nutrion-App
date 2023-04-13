@@ -35,7 +35,8 @@ class _navBarState extends State<navBar> {
       home: Scaffold(
         body: StreamBuilder<DocumentSnapshot>(
           stream: fireStore.doc(userUID.toString()).snapshots(),
-          builder: (BuildContext context, snapshot) {
+          builder: (BuildContext context, snapshot){
+
             if (!snapshot.hasData) {
               return Center(
                 child: Container(

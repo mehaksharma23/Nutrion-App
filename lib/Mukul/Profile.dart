@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrition_app/FireBase/Auth/ExceptionHandler.dart';
-import 'package:nutrition_app/FireBase/Auth/sign_in.dart';
+import 'package:nutrition_app/Mehak/Mehak.dart';
 import 'package:nutrition_app/Mukul/Components/ProfileMenuSettings.dart';
 
 class Profile extends StatefulWidget {
@@ -39,7 +39,7 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
                 CircleAvatar(
-                  backgroundImage: AssetImage("assets/anonymous.jpg"),
+                  backgroundImage: NetworkImage("${body['ProfilePic']}"),
                   radius: 80,
                 ),
                 Container(
@@ -97,7 +97,7 @@ class _ProfileState extends State<Profile> {
                         onTap: () {
                           auth.signOut().then((value) {
                             Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => SignIn()),
+                              MaterialPageRoute(builder: (context) => GetStarted()),
                             );
                           }).onError((error, stackTrace) {
                             ExceptionHandle().toastMessage(error.toString());
