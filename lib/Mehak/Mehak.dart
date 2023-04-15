@@ -1,33 +1,24 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables,
 
 import 'package:flutter/material.dart';
+import 'package:nutrition_app/FireBase/Auth/register.dart';
+import 'package:nutrition_app/FireBase/Auth/sign_in.dart';
 import 'package:nutrition_app/Mehak/slider.dart';
-import 'package:flutter/rendering.dart';
-import 'dart:ui';
 
-void main() {
-  runApp(MyApp());
+class GetStarted extends StatefulWidget {
+  @override
+  _GetStartedState createState() => _GetStartedState();
 }
 
-class MyApp extends StatelessWidget {
+class _GetStartedState extends State<GetStarted> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage(),
-    debugShowCheckedModeBanner: false,);
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.only(
+          top: 30,
+        ),
+        child: Container(
           width: MediaQuery.of(context).size.width,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,21 +39,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     slider(
                       boxName: " Eat Healthy",
                       imagePath: "assets/eathealthy.png",
-                      boxQuote:"Maintaining good health should be the primary focus of everyone" ,
+                      boxQuote:
+                          "Maintaining good health should be the primary focus of everyone",
                     ),
                     SizedBox(
                       width: 15,
-                    ),slider(
+                    ),
+                    slider(
                       boxName: " Healthy Recipes",
                       imagePath: "assets/recipe.png",
-                      boxQuote:"Browse thousands of recipes \n from all over the world." ,
+                      boxQuote:
+                          "Browse thousands of recipes \n from all over the world.",
                     ),
                     SizedBox(
                       width: 15,
-                    ),slider(
+                    ),
+                    slider(
                       boxName: "Track Your Health",
                       imagePath: "assets/track.png",
-                      boxQuote:"With amazing inbuilt tools you can \n track your progress." ,
+                      boxQuote:
+                          "With amazing inbuilt tools you can \n track your progress.",
                     ),
                     SizedBox(
                       width: 15,
@@ -72,7 +68,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Container(
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => Register()),
+                    );
+                  },
                   style: ButtonStyle(
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),
@@ -85,8 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   child: Container(
-                    height: (MediaQuery.of(context).size.height) * 0.09,
-                    width: (MediaQuery.of(context).size.width) * 0.6,
+                    height: (MediaQuery.of(context).size.height) * 0.07,
+                    width: (MediaQuery.of(context).size.width) * 0.5,
                     child: Center(
                       child: Text(
                         "Get Started",
@@ -99,9 +99,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Container(
-                child: Text(
-                  "Already have an account?Login",
-                  style: TextStyle(color: Colors.grey, fontSize: 17),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account?",
+                      style: TextStyle(color: Colors.grey, fontSize: 17),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => SignIn()),
+                        );
+                      },
+                      enableFeedback: false,
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
