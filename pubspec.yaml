@@ -37,10 +37,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_nav_bar: ^5.0.6
   flutter_launcher_icons: ^0.12.0
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  #font_awesome_flutter: ^8.11.0
+  #integration_test:
+   # sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
