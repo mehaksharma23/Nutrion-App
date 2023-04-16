@@ -12,17 +12,17 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
-  runApp(launchPage());
+  runApp(LaunchPage());
 }
 
-class launchPage extends StatefulWidget {
-  const launchPage({Key? key}) : super(key: key);
+class LaunchPage extends StatefulWidget {
+  const LaunchPage({Key? key}) : super(key: key);
 
   @override
-  State<launchPage> createState() => _launchPageState();
+  State<LaunchPage> createState() => _LaunchPageState();
 }
 
-class _launchPageState extends State<launchPage> {
+class _LaunchPageState extends State<LaunchPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
