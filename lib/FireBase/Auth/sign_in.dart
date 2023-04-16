@@ -15,6 +15,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<SignIn> {
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -71,6 +72,7 @@ class _MyHomePageState extends State<SignIn> {
       child: Scaffold(
         backgroundColor: Colors.green,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Color(0xFFB7E5AF),
           elevation: 0,
           title: Text(

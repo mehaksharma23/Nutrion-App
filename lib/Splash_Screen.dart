@@ -27,7 +27,7 @@ class _Splash_screenState extends State<Splash_screen> {
       ),
       child: Center(
         child: Text(
-          "Nutri-App".toUpperCase(),
+          "Nutri-Track".toUpperCase(),
           style: TextStyle(
             fontSize: 60,
             color: Colors.white,

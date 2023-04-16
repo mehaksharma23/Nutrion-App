@@ -22,7 +22,7 @@ class _SearchPageState extends State<SearchPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 90, 24, 0),
+              padding: const EdgeInsets.fromLTRB(24, 40, 24, 0),
               child: SearchBar(),
             ),
             Padding(

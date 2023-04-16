@@ -5,8 +5,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrition_app/BottomNavigationBar.dart';
-import 'package:nutrition_app/FireBase/Auth/sign_in.dart';
-import 'package:nutrition_app/Mukul/profileDetails.dart';
+import 'package:nutrition_app/Mehak/Mehak.dart';
 
 class Splashservices {
   void isLogin(BuildContext context) {
@@ -25,7 +24,7 @@ class Splashservices {
       Timer(
         const Duration(seconds: 3),
         () => Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => SignIn()),
+          MaterialPageRoute(builder: (context) => GetStarted()),
         ),
       );
     }
