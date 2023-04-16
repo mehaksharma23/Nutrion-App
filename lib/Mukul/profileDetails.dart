@@ -100,18 +100,6 @@ class _profileDetailsState extends State<profileDetails> {
                               ExceptionHandle().toastMessage(error.toString());
                             });
                       });
-
-                      // fireStore
-                      //     .doc(auth.currentUser!.uid)
-                      //     .set({
-                      //       "ID": auth.currentUser!.uid,
-                      //       "Name": postController.text.toString(),
-                      //       "ProfilePic" : newUrl.toString(),
-                      //     })
-                      //     .then((value) {})
-                      //     .onError((error, stackTrace) {
-                      //       ExceptionHandle().toastMessage(error.toString());
-                      //     });
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => navBar()),
                       );

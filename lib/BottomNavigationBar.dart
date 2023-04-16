@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +9,6 @@ import 'package:nutrition_app/Chirayu/favorites.dart';
 import 'package:nutrition_app/Chirayu/search_page.dart';
 import 'package:nutrition_app/Mukul/Home.dart';
 import 'package:nutrition_app/Mukul/Profile.dart';
-
-// void main() =>
-//     (runApp(MaterialApp(
-//       home: navBar(),
-//       debugShowCheckedModeBanner: false,
-//     )));
 
 class navBar extends StatefulWidget {
   const navBar({Key? key}) : super(key: key);
@@ -24,7 +19,7 @@ class navBar extends StatefulWidget {
 
 class _navBarState extends State<navBar> {
   final userUID = FirebaseAuth.instance.currentUser!.uid;
-  final fireStore = FirebaseFirestore.instance.collection('users');
+  final users = FirebaseFirestore.instance.collection('users');
 
   int currentState = 0;
 
@@ -34,9 +29,8 @@ class _navBarState extends State<navBar> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: StreamBuilder<DocumentSnapshot>(
-          stream: fireStore.doc(userUID.toString()).snapshots(),
-          builder: (BuildContext context, snapshot){
-
+          stream: users.doc(userUID.toString()).snapshots(),
+          builder: (BuildContext context, snapshot) {
             if (!snapshot.hasData) {
               return Center(
                 child: Container(

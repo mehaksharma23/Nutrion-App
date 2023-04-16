@@ -5,16 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:nutrition_app/FireBase/Auth/ExceptionHandler.dart';
 import 'package:nutrition_app/Mehak/Mehak.dart';
 import 'package:nutrition_app/Mukul/Components/ProfileMenuSettings.dart';
+import 'package:nutrition_app/Mukul/setting.dart';
+import 'package:nutrition_app/Mukul/termsAndCondition.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key, required this.body}) : super(key: key);
   final body;
+
   @override
   State<Profile> createState() => _ProfileState(body: body);
 }
 
 class _ProfileState extends State<Profile> {
-  _ProfileState({required this.body}):super();
+  _ProfileState({required this.body}) : super();
   final body;
   final auth = FirebaseAuth.instance;
 
@@ -24,7 +27,7 @@ class _ProfileState extends State<Profile> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Padding(
-          padding:  EdgeInsets.fromLTRB(0,40,0,0),
+          padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
           child: Container(
             height: (MediaQuery.of(context).size.height) * 0.9,
             width: MediaQuery.of(context).size.width,
@@ -84,12 +87,24 @@ class _ProfileState extends State<Profile> {
                       ProfileMenuCard(
                         icon: Icons.settings,
                         textBox: "Settings",
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => settingPage(),
+                            ),
+                          );
+                        },
                       ),
                       ProfileMenuCard(
                         icon: Icons.insert_page_break,
                         textBox: "Terms & Privacy Policy",
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => termsAndCondition(),
+                            ),
+                          );
+                        },
                       ),
                       ProfileMenuCard(
                         icon: Icons.logout,
@@ -97,7 +112,8 @@ class _ProfileState extends State<Profile> {
                         onTap: () {
                           auth.signOut().then((value) {
                             Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => GetStarted()),
+                              MaterialPageRoute(
+                                  builder: (context) => GetStarted()),
                             );
                           }).onError((error, stackTrace) {
                             ExceptionHandle().toastMessage(error.toString());

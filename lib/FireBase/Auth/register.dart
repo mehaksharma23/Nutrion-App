@@ -4,9 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nutrition_app/FireBase/Auth/ExceptionHandler.dart';
-import 'package:nutrition_app/FireBase/Auth/register.dart';
 import 'package:nutrition_app/FireBase/Auth/sign_in.dart';
-import 'package:nutrition_app/Mukul/profileDetails.dart';
+import 'package:nutrition_app/Mehak/profileSetup.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -183,6 +182,9 @@ class _MyHomePageState extends State<Register> {
                         setState(() {
                           loading = false;
                         });
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => profileSetup()),
+                        );
                       }).onError((error, stackTrace) {
                         ExceptionHandle().toastMessage(error.toString());
                         setState(() {
@@ -190,9 +192,7 @@ class _MyHomePageState extends State<Register> {
                         });
                       });
                     }
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => profileDetails()),
-                    );
+
                   },
                   style: ElevatedButton.styleFrom(
                     shape: StadiumBorder(),
