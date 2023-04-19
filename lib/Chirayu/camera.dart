@@ -7,7 +7,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as Path;
 import 'package:async/async.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:math';
@@ -16,10 +15,7 @@ import 'dart:math';
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
     super.key,
-    required this.camera,
   });
-
-  final List<CameraDescription> camera;
 
   @override
   TakePictureScreenState createState() => TakePictureScreenState();
@@ -28,13 +24,15 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  late List<CameraDescription> camera;
 
   @override
   void initState() {
     super.initState();
+    availableCameras().then((listOfCameras) => {camera = listOfCameras});
     _controller = CameraController(
-      widget.camera[0],
-      ResolutionPreset.ultraHigh,
+      camera[0],
+      ResolutionPreset.high,
     );
 
     // Next, initialize the controller. This returns a Future.
@@ -56,7 +54,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     var length = await imageFile.length();
 
     // string to uri
-    var uri = Uri.parse("http://172.31.219.59:5000/");
+    var uri =
+        Uri.parse("https://food-classification-api.up.railway.app/predict");
 
     // create multipart request
     var request = http.MultipartRequest("GET", uri);

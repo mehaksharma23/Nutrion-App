@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:nutrition_app/Chirayu/camera.dart';
 import 'package:nutrition_app/Chirayu/favorites.dart';
 import 'package:nutrition_app/Chirayu/search_page.dart';
 import 'package:nutrition_app/Mukul/Home.dart';
@@ -50,7 +50,7 @@ class _navBarState extends State<navBar> {
                   body: doc,
                 ),
                 SearchPage(),
-                SearchPage(),
+                TakePictureScreen(),
                 Favorites(),
                 Profile(
                   body: doc,
