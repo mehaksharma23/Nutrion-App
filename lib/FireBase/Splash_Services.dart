@@ -16,7 +16,9 @@ class Splashservices {
       Timer(
         const Duration(seconds: 3),
         () => Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => navBar()),
+          MaterialPageRoute(
+              settings: RouteSettings(name: "/navBar"),
+              builder: (context) => navBar()),
           // MaterialPageRoute(builder: (context) => profileDetails()),
         ),
       );

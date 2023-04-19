@@ -63,17 +63,15 @@ class _waterBottomModalSheetState extends State<waterBottomModalSheet> {
       setState(() {
         loading = false;
       });
+      Navigator.of(context).popUntil(
+        ModalRoute.withName('/navBar'),
+      );
     }).onError((error, stackTrace) {
       ExceptionHandle().toastMessage(error.toString());
       setState(() {
         loading = false;
       });
     });
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => navBar(),
-      ),
-    );
   }
 
   @override

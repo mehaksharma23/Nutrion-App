@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrition_app/FireBase/Auth/ExceptionHandler.dart';
 import 'package:nutrition_app/Mehak/Mehak.dart';
+import 'package:nutrition_app/Mehak/editProfile.dart';
 import 'package:nutrition_app/Mukul/Components/ProfileMenuSettings.dart';
 import 'package:nutrition_app/Mukul/setting.dart';
 import 'package:nutrition_app/Mukul/termsAndCondition.dart';
@@ -77,13 +78,21 @@ class _ProfileState extends State<Profile> {
                       ProfileMenuCard(
                         icon: Icons.person,
                         textBox: "Edit Profile",
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => editProfile(
+                                body: body,
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      ProfileMenuCard(
-                        icon: Icons.star,
-                        textBox: "Renew Plan",
-                        onTap: () {},
-                      ),
+                      // ProfileMenuCard(
+                      //   icon: Icons.star,
+                      //   textBox: "Renew Plan",
+                      //   onTap: () {},
+                      // ),
                       ProfileMenuCard(
                         icon: Icons.settings,
                         textBox: "Settings",

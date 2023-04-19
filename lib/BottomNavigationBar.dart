@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:nutrition_app/Chirayu/favorites.dart';
 import 'package:nutrition_app/Chirayu/search_page.dart';
@@ -28,37 +28,47 @@ class _navBarState extends State<navBar> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: StreamBuilder<DocumentSnapshot>(
-          stream: users.doc(userUID.toString()).snapshots(),
-          builder: (BuildContext context, snapshot) {
-            if (!snapshot.hasData) {
-              return Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.lightGreenAccent,
+        body: RefreshIndicator(
+          child: StreamBuilder<DocumentSnapshot>(
+            stream: users.doc(userUID.toString()).snapshots(),
+            builder: (BuildContext context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                      color: Colors.lightGreenAccent,
+                    ),
+                    child: Text(
+                        'Can\'t connect to Database, Try again later........'),
                   ),
-                  child: Text(
-                      'Can\'t connect to Database, Try again later........'),
-                ),
-              );
-            } else {
-              var doc = snapshot.data as DocumentSnapshot;
-              List pages = [
-                Home(
-                  body: doc,
-                ),
-                SearchPage(),
-                SearchPage(),
-                Favorites(),
-                Profile(
-                  body: doc,
-                ),
-              ];
-              return pages[currentState];
-            }
-          },
+                );
+              } else {
+                var doc = snapshot.data as DocumentSnapshot;
+                List pages = [
+                  Home(
+                    body: doc,
+                  ),
+                  SearchPage(),
+                  SearchPage(),
+                  Favorites(),
+                  Profile(
+                    body: doc,
+                  ),
+                ];
+                return pages[currentState];
+              }
+            },
+          ),
+          onRefresh:(){
+            return Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                  settings: RouteSettings(name: "/navBar"),
+                  builder: (context) => navBar()),
+              // MaterialPageRoute(builder: (context) => profileDetails()),
+            );
+          }
         ),
         bottomNavigationBar: Container(
           width: MediaQuery.of(context).size.width,

@@ -70,6 +70,7 @@ class _MyHomePageState extends State<SignIn> {
         return true;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.green,
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -188,19 +189,19 @@ class _MyHomePageState extends State<SignIn> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                child: Center(
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+              //   child: Center(
+              //     child: Text(
+              //       "Forgot Password?",
+              //       style: TextStyle(
+              //         color: Colors.white,
+              //         fontWeight: FontWeight.bold,
+              //         fontSize: 15,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: Center(

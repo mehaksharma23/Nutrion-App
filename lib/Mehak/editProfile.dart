@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, no_logic_in_create_state
 
 import 'dart:io';
 
@@ -10,26 +10,31 @@ import 'package:flutter/rendering.dart';
 import 'dart:ui';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:flutter/services.dart' show rootBundle;
 
 import '../BottomNavigationBar.dart';
 import '../FireBase/Auth/ExceptionHandler.dart';
 
-class profileSetup extends StatefulWidget {
-  const profileSetup({Key? key}) : super(key: key);
+class editProfile extends StatefulWidget {
+  editProfile({Key? key, required this.body}) : super(key: key);
+  var body;
 
   @override
-  State<profileSetup> createState() => _profileSetupState();
+  State<editProfile> createState() => _editProfileState(body: body);
 }
 
-class _profileSetupState extends State<profileSetup> {
+class _editProfileState extends State<editProfile> {
+  _editProfileState({required this.body});
+
+  var body;
   Color inactiveColor = Color(0xF91C788);
   Color activeColor = Colors.white;
-  int height = 180;
-  int weight = 30;
-  int Age = 15;
+  int height = 0;
+
+  int weight = 0;
+  int Age = 0;
   bool male = true;
   bool female = false;
+  String profilePic = "";
 
   final auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance.collection('users');
@@ -42,6 +47,7 @@ class _profileSetupState extends State<profileSetup> {
   final nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  File? _image;
   final picker = ImagePicker();
 
   Future getImageGallery() async {
@@ -58,21 +64,29 @@ class _profileSetupState extends State<profileSetup> {
     });
   }
 
-  Future<File> getImageFileFromAssets(String path) async {
-    final byteData = await rootBundle.load('assets/$path');
-    final Directory systemTempDir = Directory.systemTemp;
-    final file = File('${(systemTempDir.path)}/$path');
-    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-    return file;
-  }
-  File? _image;
-
-
   @override
   void dispose() {
     // TODO: implement dispose
     nameController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    nameController.text = body["Name"];
+    height = int.parse(body["Height"]);
+    Age = int.parse(body["Age"]);
+    weight = int.parse(body["Weight"]);
+    profilePic = body["ProfilePic"];
+    if (body["Gender"] == "Male") {
+      male = true;
+      female = false;
+    } else {
+      male = false;
+      female = true;
+    }
+    super.initState();
   }
 
   @override
@@ -213,8 +227,7 @@ class _profileSetupState extends State<profileSetup> {
                                     )
                                   : CircleAvatar(
                                       radius: 80,
-                                      backgroundImage:
-                                          AssetImage('assets/anonymous.jpg'),
+                                      backgroundImage: NetworkImage(profilePic),
                                     ),
                             ),
                           ),
@@ -439,41 +452,59 @@ class _profileSetupState extends State<profileSetup> {
                     .FirebaseStorage.instance
                     .ref('/${auth.currentUser!.uid}/ Profile_Picture');
                 firebase_storage.UploadTask uploadTask;
-                if (_image != null) {
-                  uploadTask = ref.putFile(_image!.absolute);
-                } else {
-                  _image = await getImageFileFromAssets('anonymous.jpg') ;
-                  uploadTask = ref.putFile(_image!.absolute);
-                }
 
                 if (_formKey.currentState!.validate()) {
                   setState(() {
                     loading = true;
                   });
-                  await Future.value(uploadTask).then((value) async {
-                    var newUrl = await ref.getDownloadURL();
-                    fireStore.doc(auth.currentUser!.uid).set({
-                      "ID": auth.currentUser!.uid,
-                      "Name": nameController.text.toString(),
-                      "Gender": male ? "Male" : "Female",
-                      "ProfilePic": newUrl.toString(),
-                      "Height": height.toString(),
-                      "Weight": weight.toString(),
-                      "Age": Age.toString(),
-                    }).then((value) {
-                      setState(() {
-                        loading = false;
+                  if (_image != null) {
+                    uploadTask = ref.putFile(_image!.absolute);
+                    await Future.value(uploadTask).then((value) async {
+                      var newUrl = await ref.getDownloadURL();
+                      fireStore.doc(auth.currentUser!.uid).update({
+                        "ID": auth.currentUser!.uid,
+                        "Name": nameController.text.toString(),
+                        "Gender": male ? "Male" : "Female",
+                        "ProfilePic": newUrl.toString(),
+                        "Height": height.toString(),
+                        "Weight": weight.toString(),
+                        "Age": Age.toString(),
+                      }).then((value) {
+                        setState(() {
+                          loading = false;
+                        });
+                        ExceptionHandle().toastMessage("UPDATED");
+                        Navigator.pop(context);
+                      }).onError((error, stackTrace) {
+                        setState(() {
+                          loading = false;
+                        });
+                        ExceptionHandle().toastMessage(error.toString());
                       });
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => navBar()),
-                      );
-                    }).onError((error, stackTrace) {
-                      setState(() {
-                        loading = false;
-                      });
-                      ExceptionHandle().toastMessage(error.toString());
                     });
-                  });
+                  }
+                  else
+                    {
+                      fireStore.doc(auth.currentUser!.uid).update({
+                        "ID": auth.currentUser!.uid,
+                        "Name": nameController.text.toString(),
+                        "Gender": male ? "Male" : "Female",
+                        "Height": height.toString(),
+                        "Weight": weight.toString(),
+                        "Age": Age.toString(),
+                      }).then((value) {
+                        setState(() {
+                          loading = false;
+                        });
+                        ExceptionHandle().toastMessage("UPDATED");
+                        Navigator.pop(context);
+                      }).onError((error, stackTrace) {
+                        setState(() {
+                          loading = false;
+                        });
+                        ExceptionHandle().toastMessage(error.toString());
+                      });
+                    }
                 }
               },
               child: Container(

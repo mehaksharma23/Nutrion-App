@@ -42,6 +42,8 @@ class _MyHomePageState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       backgroundColor: Colors.green,
       appBar: AppBar(
         automaticallyImplyLeading: false,

@@ -74,17 +74,18 @@ class _CaloriesBottomModalSheetState extends State<CaloriesBottomModalSheet> {
       setState(() {
         loading = false;
       });
+      // Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) => navBar(),
+      //   ),
+      // );
+      Navigator.pop(context);
     }).onError((error, stackTrace) {
       ExceptionHandle().toastMessage(error.toString());
       setState(() {
         loading = false;
       });
     });
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => navBar(),
-      ),
-    );
   }
 
   @override
