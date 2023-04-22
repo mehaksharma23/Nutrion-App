@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:nutrition_app/FireBase/Splash_Services.dart';
@@ -22,18 +22,36 @@ class _Splash_screenState extends State<Splash_screen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Color(0xFF91C788),
+        color: Colors.white,
       ),
-      child: Center(
-        child: Text(
-          "Nutri-Track".toUpperCase(),
-          style: TextStyle(
-            fontSize: 50,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+      child: Stack(
+        children: [
+          Center(
+            child: Image(
+              image: AssetImage("assets/SplashScreen.jpg"),
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0,0,0,50),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    valueColor:AlwaysStoppedAnimation(Colors.green),
+                    backgroundColor: Colors.white,
+
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

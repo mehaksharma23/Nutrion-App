@@ -74,11 +74,7 @@ class _CaloriesBottomModalSheetState extends State<CaloriesBottomModalSheet> {
       setState(() {
         loading = false;
       });
-      // Navigator.of(context).pushReplacement(
-      //   MaterialPageRoute(
-      //     builder: (context) => navBar(),
-      //   ),
-      // );
+      ExceptionHandle().toastMessage("Changes will reflect in few moments");
       Navigator.pop(context);
     }).onError((error, stackTrace) {
       ExceptionHandle().toastMessage(error.toString());

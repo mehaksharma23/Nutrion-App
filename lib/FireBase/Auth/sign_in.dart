@@ -15,7 +15,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<SignIn> {
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -247,8 +246,7 @@ class _MyHomePageState extends State<SignIn> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => Register()),
                       );
                     },

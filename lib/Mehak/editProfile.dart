@@ -474,6 +474,9 @@ class _editProfileState extends State<editProfile> {
                           loading = false;
                         });
                         ExceptionHandle().toastMessage("UPDATED");
+                        ExceptionHandle().toastMessage(
+                            "Changes will reflect in few moments");
+
                         Navigator.pop(context);
                       }).onError((error, stackTrace) {
                         setState(() {
@@ -482,29 +485,27 @@ class _editProfileState extends State<editProfile> {
                         ExceptionHandle().toastMessage(error.toString());
                       });
                     });
-                  }
-                  else
-                    {
-                      fireStore.doc(auth.currentUser!.uid).update({
-                        "ID": auth.currentUser!.uid,
-                        "Name": nameController.text.toString(),
-                        "Gender": male ? "Male" : "Female",
-                        "Height": height.toString(),
-                        "Weight": weight.toString(),
-                        "Age": Age.toString(),
-                      }).then((value) {
-                        setState(() {
-                          loading = false;
-                        });
-                        ExceptionHandle().toastMessage("UPDATED");
-                        Navigator.pop(context);
-                      }).onError((error, stackTrace) {
-                        setState(() {
-                          loading = false;
-                        });
-                        ExceptionHandle().toastMessage(error.toString());
+                  } else {
+                    fireStore.doc(auth.currentUser!.uid).update({
+                      "ID": auth.currentUser!.uid,
+                      "Name": nameController.text.toString(),
+                      "Gender": male ? "Male" : "Female",
+                      "Height": height.toString(),
+                      "Weight": weight.toString(),
+                      "Age": Age.toString(),
+                    }).then((value) {
+                      setState(() {
+                        loading = false;
                       });
-                    }
+                      ExceptionHandle().toastMessage("UPDATED");
+                      Navigator.pop(context);
+                    }).onError((error, stackTrace) {
+                      setState(() {
+                        loading = false;
+                      });
+                      ExceptionHandle().toastMessage(error.toString());
+                    });
+                  }
                 }
               },
               child: Container(

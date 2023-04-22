@@ -24,14 +24,19 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
-  late List<CameraDescription> camera;
+  late List<CameraDescription> _camera;
+
+  Future<List<CameraDescription>> initilizeCamera() async {
+    var _camera = await availableCameras();
+    return _camera;
+  }
 
   @override
   void initState() {
     super.initState();
-    availableCameras().then((listOfCameras) => {camera = listOfCameras});
+    _camera = initilizeCamera() as List<CameraDescription>;
     _controller = CameraController(
-      camera[0],
+      _camera[0],
       ResolutionPreset.high,
     );
 

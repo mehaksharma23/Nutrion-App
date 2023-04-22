@@ -60,6 +60,7 @@ class _waterBottomModalSheetState extends State<waterBottomModalSheet> {
       },
       SetOptions(merge: true),
     ).then((value) {
+      ExceptionHandle().toastMessage("Changes will reflect in few moments");
       setState(() {
         loading = false;
       });
