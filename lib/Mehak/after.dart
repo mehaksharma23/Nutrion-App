@@ -1,30 +1,33 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter/rendering.dart';
 import 'dart:ui';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: after(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
 
 class after extends StatefulWidget {
+  after({
+    required this.res,
+    required this.imagePath,
+    super.key,
+});
+  String imagePath;
+  dynamic res;
   @override
-  State<after> createState() => _afterState();
+  State<after> createState() => _afterState(imagePath:  imagePath, res: res);
 }
 
 class _afterState extends State<after> {
+  _afterState({
+    required this.res,
+    required this.imagePath,
+  });
+  String imagePath;
+  dynamic res;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,9 +39,8 @@ class _afterState extends State<after> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                child: Image(
-                  image: AssetImage("assets/burger.png"),
-                ),
+                height: MediaQuery.of(context).size.height*0.1,
+                child:  Image.file(File(imagePath)),
               ),
               Container(
                 width: (MediaQuery.of(context).size.width) * 1,
@@ -135,7 +137,7 @@ class _afterState extends State<after> {
                   children: [
                     Container(
                       child: Text(
-                        "Details",
+                        "${res["class"]}",
                         style: TextStyle(
                           fontSize: 27,
                         ),

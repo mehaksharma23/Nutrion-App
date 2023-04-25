@@ -5,11 +5,13 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:nutrition_app/Mehak/after.dart';
 import 'package:path/path.dart' as Path;
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import "package:nutrition_app/main.dart";
+// import "package:nutrition_app/main.dart";
+import 'package:nutrition_app/Mukul/HomeWithFirebase.dart';
 
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
@@ -103,7 +105,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) =>
-              DisplayPictureScreen(imagePath: path, res: response),
+              after(imagePath: path, res: response),
         ),
       );
     } catch (e) {
@@ -137,8 +139,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                         shape: BoxShape.rectangle,
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
+                          topLeft: Radius.circular(45),
+                          topRight: Radius.circular(45),
                         ),
                       ),
                       child: InkWell(

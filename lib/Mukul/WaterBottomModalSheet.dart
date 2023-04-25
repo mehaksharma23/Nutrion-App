@@ -64,9 +64,7 @@ class _waterBottomModalSheetState extends State<waterBottomModalSheet> {
       setState(() {
         loading = false;
       });
-      Navigator.of(context).popUntil(
-        ModalRoute.withName('/navBar'),
-      );
+      Navigator.pop(context);
     }).onError((error, stackTrace) {
       ExceptionHandle().toastMessage(error.toString());
       setState(() {
