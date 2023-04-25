@@ -1,26 +1,46 @@
-import 'package:flutter/material.dart';
-import 'package:nutrition_app/Chirayu/favorites.dart';
-import 'package:nutrition_app/Chirayu/components/recipes.dart';
-import 'Chirayu/search_page.dart';
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
-void main() {
-  runApp(const MyApp());
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:nutrition_app/Splash_Screen.dart';
+import 'package:camera/camera.dart';
+
+List<CameraDescription>? cameras;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  cameras = await availableCameras();
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  runApp(LaunchPage());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LaunchPage extends StatefulWidget {
+  const LaunchPage({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<LaunchPage> createState() => _LaunchPageState();
+}
+
+class _LaunchPageState extends State<LaunchPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: "Signika"),
-      home: Favorites(),
-      routes: {
-        "/foods": (context) => Favorites(),
-        "/recipes": (context) => FavoriteRecipes()
-      },
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Splash_screen(),
+      ),
     );
   }
 }

@@ -31,18 +31,16 @@ class _navBarState extends State<navBar> {
         body: StreamBuilder<DocumentSnapshot>(
           stream: users.doc(userUID.toString()).snapshots(),
           builder: (BuildContext context, snapshot) {
-
             if (!snapshot.hasData) {
               return Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CircularProgressIndicator(
-                      valueColor:AlwaysStoppedAnimation(Colors.green),
+                      valueColor: AlwaysStoppedAnimation(Colors.green),
                       backgroundColor: Colors.white,
                     ),
                     SizedBox(

@@ -9,7 +9,7 @@ import 'package:path/path.dart' as Path;
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:math';
+import "package:nutrition_app/main.dart";
 
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
@@ -24,23 +24,23 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
-  late List<CameraDescription> _camera;
+  bool loading = false;
 
-  Future<List<CameraDescription>> initilizeCamera() async {
-    var _camera = await availableCameras();
-    return _camera;
+  Future<void> _initializeCamera() async {
+    final cameras = await availableCameras();
+    final camera = cameras.first;
+    _controller = CameraController(camera, ResolutionPreset.ultraHigh);
+    await _controller.initialize();
   }
 
   @override
   void initState() {
     super.initState();
-    _camera = initilizeCamera() as List<CameraDescription>;
     _controller = CameraController(
-      _camera[0],
-      ResolutionPreset.high,
+      cameras!.first,
+      ResolutionPreset.ultraHigh,
     );
 
-    // Next, initialize the controller. This returns a Future.
     _initializeControllerFuture = _controller.initialize();
   }
 
@@ -59,8 +59,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     var length = await imageFile.length();
 
     // string to uri
-    var uri =
-        Uri.parse("https://food-classification-api.up.railway.app/predict");
+    var uri = Uri.parse("http://172.31.219.59:8000/predict");
 
     // create multipart request
     var request = http.MultipartRequest("GET", uri);
@@ -79,12 +78,18 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
     valueJson = await response.stream.bytesToString();
 
+    print('#######################$valueJson');
+
     return jsonDecode(valueJson);
   }
 
   void capture() async {
+    setState(() {
+      loading = true;
+    });
+
     try {
-      await _initializeControllerFuture;
+      // await _initializeControllerFuture;
 
       final imageX = await _controller.takePicture();
       final path = imageX.path;
@@ -104,6 +109,10 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     } catch (e) {
       print(e);
     }
+
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -122,7 +131,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                   Positioned(
                     bottom: 0,
                     child: Container(
-                      height: .2 * MediaQuery.of(context).size.height,
+                      height: .15 * MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
@@ -136,18 +145,29 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                         onTap: capture,
                         child: Stack(
                           alignment: AlignmentDirectional.center,
-                          children: [
-                            Icon(
-                              size: 100,
-                              Icons.circle,
-                              color: Color.fromRGBO(255, 192, 184, 1),
-                            ),
-                            Icon(
-                              size: 50,
-                              Icons.circle,
-                              color: Color.fromRGBO(255, 132, 115, 1),
-                            ),
-                          ],
+                          children: loading
+                              ? [
+                                  Icon(
+                                    size: 100,
+                                    Icons.circle,
+                                    color: Color.fromRGBO(255, 192, 184, 1),
+                                  ),
+                                  CircularProgressIndicator(
+                                    color: Color.fromRGBO(255, 132, 115, 1),
+                                  )
+                                ]
+                              : [
+                                  Icon(
+                                    size: 100,
+                                    Icons.circle,
+                                    color: Color.fromRGBO(255, 192, 184, 1),
+                                  ),
+                                  Icon(
+                                    size: 50,
+                                    Icons.circle,
+                                    color: Color.fromRGBO(255, 132, 115, 1),
+                                  ),
+                                ],
                         ),
                       ),
                     ),
