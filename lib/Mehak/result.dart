@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 class ResultScreen extends StatefulWidget {
-
+//shows the result screen after calculation
 
    @override
    _ResultScreenState createState() => _ResultScreenState();
